@@ -12,9 +12,9 @@ export default function Banner() {
                             <div className="col-lg-6 col-md-6 col-sm-6">
                             {/* offset-lg-6 col-xl-5 offset-xl-7 */}
                                 <div className="banner_content">
-                                    <h3>Hospital Appointment Booking</h3>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
-                                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                                    <h3>Hospital Appointment Booking App</h3>
+                                    <p>This Demo App is a light demo that showcases the ease of working with the EOS Sandbox data nodes.
+                                        The app is a simple 5 page Hospital Appointment Booking utility that synchronises with data from multiple civic  service nodes.</p>
                                 </div>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6">
