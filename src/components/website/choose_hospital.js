@@ -8,19 +8,18 @@ import validate from './validation/FormValidationRules';
 import { Card, Logo, Form, Success, Input, Button, Error } from "./AuthForms";
 
 import FlashMessage from 'react-flash-message'
+import axios from "axios";
+const _ = require('lodash');
+
+  
 
 
-export default function ChooseHospital() {
+export default function ChooseHospital(props) {
     
-    const [fullName, setFullName] = useState("Michael Scofield");
-    const [email, setEmail] = useState("michael@gmail.com");
-	const [address, setAddress] = useState("31,Adekoya close Ikoyi");
-    const [phone, setPhone]= useState("08079552377");
-    const [city, setCity]= useState('Lagos');    
-    const [lga, setLga]= useState('Isale Eko');    
-    const [description, setDescription]= useState('');    
-    const [selectAilment, setSelectAilment]= useState('');    
 
+    const [hospitals, setHospitals]= useState([]);
+   
+    const [hospitalData, setHospitalData] = useState('');    
 
 	const [isError, setIsError] = useState(false);
     const [disabled, setDisasbled] = useState(false)
@@ -32,49 +31,78 @@ export default function ChooseHospital() {
 
     const [message, setMessage] = useState('');
     const [isSucess, setIsSucess] = useState(false);
+    const [state, setState] = useState('');
+    const [state2, setState2] = useState('');
 
 
+    useEffect(() => { 
+        getHospitals();
+        setState2(props.location.state.property_state);
+
+
+      }, []);
+
+      const getHospitals = () => {
+        axios.get('https://cors-anywhere.herokuapp.com/https://api.health.staging.ekoopenbuild.com/hospitals', {
+            headers: {
+                'Authorisation': ``,
+            }
+          })
+        .then(result => {
+            console.log(result.data.OCXPayload.data.data)
+            setHospitals(result.data.OCXPayload.data.data)
+                
+        }).catch(err =>{
+            // setMessage(err.response.data.message)
+            // console.log(err.response.statusText); 
+        })
+  }
+
+  const findValue = (arr, value) => {
+    return _.find(arr, (elem) => {
+        return elem.uuid ? elem.uuid === value : elem.name === value;
+    });
+}
 
     const postAppointment = (e) => {
 		e.preventDefault();
 
+        let hospitali = findValue(hospitals, hospitalData)
+
 		var data = {
-            fullName,
-            email,
-            address,
-            phone,
-            city,
-            lga,
-            description,
-            selectAilment,
+            hospitalData: hospitali,
+            hospitalDataState: state2,            
 		}
 		
-        let handleError = validate(data)
-
-        if (handleError)
-        {
-            setErrors(handleError);
-        }
-        
-
+        setState(data)
+      
         setIsSucess(true)
         setMessage('Submitted Successfully');
 
 	  }
 	
-
-
-     
-    
-    
       const checkboxHandler = () => {
-        setConsent(!consent);
-        
+        setConsent(!consent);        
       }
-
-
     
-    
+      const hospitalList = hospitals && hospitals.map(({uuid, speciality, name, lga, address}) => {
+        return (<div key={uuid}>
+                <input
+                type="radio"
+                name="dynamic-radio"
+                id={uuid}
+                value={uuid}
+                checked={hospitalData === uuid}
+                onChange={e => {setHospitalData(e.target.value);}}
+                />
+                <label htmlFor={uuid}>
+                 <p> Name: {name.toUpperCase()} </p>
+                 <p>  Lga: {lga} </p>
+                 <p>  Address: {address} </p>
+                </label>
+            </div>)
+    })
+
     return (
         <div>
             <Header />
@@ -93,7 +121,7 @@ export default function ChooseHospital() {
 
             <div className="container mg-top">
 
-            {isSucess ? (<div> <FlashMessage duration={5000}> <Success>{message}</Success> </FlashMessage><Redirect to="/choose_time_personnel" /> </div>) : ''}
+            {isSucess ? (<div> <FlashMessage duration={5000}> <Success>{message}</Success> </FlashMessage> <Redirect to={{ pathname : "/choose_time_personnel", state: {property_state: state} }}/> </div>) : ''}
 
 
 
@@ -104,43 +132,17 @@ export default function ChooseHospital() {
 
                     <div className="choices">
 
-                        <div className="choice">
-                            <input type="radio" name="answer" id="radio2" value="2" /> 
-                            <label htmlFor="radio2">Hospital 1</label>
-                        </div>
-<br />
-                        <div className="choice">
-                            <input type="radio" name="answer" id="radio3" value="3" />
-                            <label htmlFor="radio3">Hospital 2</label>
-                        </div>
-                        
-                        <div className="choice4">
-                            <input type="radio" name="answer" id="radio4" value="4" />
-                            <label htmlFor="radio4">Hospital 3</label>
-                        </div>
-                        
+                         {hospitalList}
+
                         <button className="btn btn-primary btn-block" type="submit" > Check Available Time & Personnel </button>
-
                     </div>
-
-                        {/* <div className="col-xl-6 form-group">  book_appointment
-                                <div className="submit-field">
-                                            <div className="input-with-icon">
-                                                <h6> Hospital List </h6>
-                                            <select value={selectAilment} onChange={e => {setSelectAilment(e.target.value);}} placeholder="Select the organization from the drop-down list" >
-                                                    <option value="hospital1"> Hospital 1 </option> 
-                                                    <option value="hospital2"> Hospital 2 </option> 
-                                                </select>
-                                                <i className="icon-material-outline-business-center"></i>
-                                            </div>
-                                </div>
-                        </div> */}
 
                     </div>
                     </div>
             </form>
 
             </div>
+            <br />
 
             <Footer />
         </div>

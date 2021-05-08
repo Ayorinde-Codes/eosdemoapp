@@ -10,11 +10,28 @@ import { Card, Logo, Form, Success, Input, Button, Error } from "./AuthForms";
 import FlashMessage from 'react-flash-message'
 
 
-export default function BookAppointment() {
+export default function BookAppointment(props) {
 
 
+    const [state, setState] = useState('');
+
     
-    
+    useEffect(() => { 
+        setState(props.location.state.property_state);
+      }, []);
+
+
+      	function makeid(){
+		var result           = '';
+		var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		var charactersLength = characters.length;
+		for ( var i = 0; i < 5; i++ ) {
+		   result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+		return result;
+	 };
+
+
     return (
         <div>
             <Header />
@@ -43,26 +60,27 @@ export default function BookAppointment() {
                     <div className="col-md-6">
                         
 
-                {/* <h2> Thank you </h2> */}
-
                 <div className="card" style={{width: "18rem" }} align="center">
-                            {/* <img className="card-img-top" src="..." alt="Card image cap">  "list-style-type:square"*/}
+
                             <div className="card-body">
-                                <h5 className="card-title">Appointment ID: </h5>
                                 <p className="card-text">
                                          All Appointment Details
-                                    <ul style={{listStyleType: "square"}}>
-                                        {/* <li> </li> */}
-                                          <li>  biodataofresident: </li> 
-                                          <li>  issue: </li>
-                                          <li>  comments: </li>
-                                          <li>  hospital name: </li>
-                                          <li>  time: </li>
-                                        <li> doctors name: </li>
-                                        <li>Tea</li>
-                                        <li>Milk</li>
-                                    </ul>
                                 </p>
+
+                                    <ul style={{listStyleType: "square"}}>
+
+                                          <b>  Bio Data Of Resident: </b> 
+                                          <li>  <p>Appointment Id: {makeid()} </p></li> 
+                                          <li>  <p>Lasgidi Id: {state.AppointmentState ? state.AppointmentState.hospitalDataState.lasgidi_id : ''} </p></li>
+                                          <li>  <p>Firstname: {state.AppointmentState ?  state.AppointmentState.hospitalDataState.firstname : ''} </p></li>
+                                          <li>  <p>LastName: {state.AppointmentState ? state.AppointmentState.hospitalDataState.lastname : ''} </p></li>
+                                          <li>  <p>User Address: {state.AppointmentState ? state.AppointmentState.hospitalDataState.address : ''} </p></li>
+                                          <li>  <p>hospital name: {state.AppointmentState ?  state.AppointmentState.hospitalData.name : ''} </p></li>
+                                          <li>  <p>hospital Address: {state.AppointmentState ?  state.AppointmentState.hospitalData.address : ''} </p></li>
+                                          <li>  <p>hospital Speciality: {state.AppointmentState ? state.AppointmentState.hospitalData.speciality : ''} </p></li>
+                                          <li>  <p>time: {state.appointment_date} </p></li>
+                                        <li> <p>doctors name: {state.selectDoctors} </p></li> 
+                                    </ul>
                                 <Link to={'/individual_registration'}> <button className="btn btn-primary"> StartAgain </button> </Link>
 
                             </div>
@@ -71,21 +89,6 @@ export default function BookAppointment() {
                             </div>
 
                 </div>
-                         {/* <h2> </h2>   Thank you message and Data showing appointment ID (random
-                            generated) 
-                            Allappointmentdetails,
-                            biodataofresident,
-                            issue,
-                            comments,
-                            hospital name, 
-                            time and 
-                            doctors name
-– 1buttons[StartAgain].Thisgoestopage1
-                            
-                            */}
-
-                            
-
 
             </div>
 
@@ -93,3 +96,4 @@ export default function BookAppointment() {
         </div>
     )
 }
+

@@ -16,6 +16,9 @@ import BounceLoader from "react-spinners/BounceLoader";
 
 import axios from "axios";
 
+const _ = require('lodash');
+
+
 // import  { EOS }  from '@ekoopensource/sdk';
 
 // const credentials = {
@@ -36,7 +39,6 @@ export default function IndividualRegistration() {
 
         getCitizens();
 
-        // getResidents();
       }, []);
     // EosSdk.setEnviroment("staging"); 
 
@@ -60,6 +62,7 @@ export default function IndividualRegistration() {
     const [lasgidiId, setLasgidiId] = useState('');
     const [pinCode, setPinCode] = useState("");
 	const [isError, setIsError] = useState(false);
+	const [lagError, setLagError] = useState(false);
     const [disabled, setDisasbled] = useState(false)
 	let [loading, setLoading] = useState(true);
 	let [color, setColor] = useState("green");
@@ -68,7 +71,9 @@ export default function IndividualRegistration() {
     const [errors, setErrors] = useState('');
 
     const [message, setMessage] = useState('');
+    const [messageLas, setMessageLas] = useState('');
     const [isSucess, setIsSucess] = useState(false);
+    const [state, setState] = useState('');
 
 
 
@@ -77,6 +82,11 @@ export default function IndividualRegistration() {
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
   
+    const findValue = (arr, value) => {
+        return _.find(arr, (elem) => {
+            return elem.lasgidi_id ? elem.lasgidi_id === value : elem.name === value;
+        });
+    }
 
     const postIndividualRegistration = (e) => {
 		e.preventDefault();
@@ -85,18 +95,30 @@ export default function IndividualRegistration() {
             lasgidiId
 		}   
 		
-        // let handleError = validate(data.lasgidiId)
+        const citizen = citizens && citizens.map(({uuid, lasgidi_id, firstname, lastname, address}) => {
+            return (lasgidi_id)
+        })
 
-        // validateInput(handleError)
+        let lasgidi_Id = data.lasgidiId;
 
-    //     if (handleError)
-    //     {
-    //       return setErrors(handleError);
-    //       console.log("ereere")
+    let citizen_data = lasgidi_Id
 
-    //     }
-    //    else{
-    //        console.log("elses")
+    let citizen_data_array = citizen;
+
+    let check_citizen_data = _.includes(citizen_data_array, citizen_data);
+
+    if(check_citizen_data == false)
+    {
+    //   return validationError(req, res, 422, { message: 'Domain Invite Mismatch, invitee | inviter expected' });
+            setMessageLas("invalid Lasgidi Id")
+            setLagError(true);
+            setDisasbled(false); 
+
+    }
+
+    let aboutAboutment= findValue(citizens, lasgidiId);
+    setState(aboutAboutment);
+
 
         return  onOpenModal()
 
@@ -118,32 +140,25 @@ export default function IndividualRegistration() {
                pinCode
 		}
 		
+        const pin= "4539";
+        const errorMessage = "Pin Code Incorrect";
 
-        // let handleError = validate(data.pinCode)
+        if(pin != data.pinCode)
+        {
 
-        // if (handleError)
-        // {
-        //     setErrors(handleError);
-        // }
+            setMessage(errorMessage)
 
-        // else{
-
-            const pin= "4539";
-            const errorMessage = "Pin Code Incorrect";
-
-            if(pin != data.pinCode)
-            {
-                console.log(data.pinCode);
-                setMessage(errorMessage)
-
-                setIsError(true);
-                setDisasbled(false);       
-            }
+            setIsError(true);
+            setDisasbled(false); 
             
-            else{
-                setIsSucess(true)
-                setMessage('Submitted Successfully'); 
-            }
+            
+
+        }
+        
+        else{
+            setIsSucess(true)
+            setMessage('Submitted Successfully'); 
+        }
 
 	  }
     
@@ -153,33 +168,26 @@ export default function IndividualRegistration() {
         
       }
 
-    
-    //   const doctors = EosSdk.fetchData("citizens","citizens");
-
-    //   console.log(doctors);
-
 
     const getCitizens = () => {
-        axios.get('https://api.citizens.staging.ekoopenbuild.com/citizens', {
+        axios.get('https://cors-anywhere.herokuapp.com/https://api.citizens.staging.ekoopenbuild.com/citizens', {
             headers: {
-              'Authorisation': ``
+                'Authorisation': ``,
             }
           })
         .then(result => {
-
-                console.log(result.data.OCXPayload.data.data)
-                setCitizens(result.data.OCXPayload.data.data)
+            setCitizens(result.data.OCXPayload.data.data)
                 
         }).catch(err =>{
             // setMessage(err.response.data.message)
-            console.log(err.response.statusText);
+            // console.log(err.response.statusText); 
         })
   }
 
-  console.log(citizens);
 
     return (
         <div>
+
             <Header />
             <section className="hero-banner d-flex align-items-center">
                 <div className="container text-center">
@@ -206,13 +214,20 @@ export default function IndividualRegistration() {
           <div className="panel panel-default box-shadow">
 
             <div className="panel-body">
+
+                { lagError && (<div>
+                                    <FlashMessage duration={5000}>
+                                    <Error> {messageLas}</Error>
+                                    </FlashMessage>
+                            </div>)
+
+                }
             
             <form onSubmit={postIndividualRegistration}>
-
                 <div className="form-group">
                   <div className="input-group">
                     <div className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></div>
-                    <input type="number" min="0" name="lasgidiid"  value={lasgidiId || ''} onChange={e => {setLasgidiId(e.target.value);}} className={`input ${errors.lasgidiId && 'border border-danger'} with-border`}  placeholder="Enter your LasGidi ID to begin" required />
+                    <input type="text"  name="lasgidiid"  value={lasgidiId || ''} onChange={e => {setLasgidiId(e.target.value);}} className={`input ${errors.lasgidiId && 'border border-danger'} with-border`}  placeholder="Enter your LasGidi ID to begin" required />
                                 {errors.lasgidiId && (
                                     <p className="text-danger">{errors.lasgidiId}</p>
                                 )}
@@ -233,17 +248,19 @@ export default function IndividualRegistration() {
                                 </label>
                             </div> */}
 
-                            {/* <a className="btn btn-primary btn-block" type="submit" onClick={onOpenModal}> Submit </a> */}
+                {/* <a className="btn btn-primary btn-block" type="submit" onClick={onOpenModal}> Submit </a> */}
+                
                 <button className="btn btn-primary btn-block" type="submit"> Submit </button>
 
                 {/* <a className="btn btn-primary btn-sm" type="submit"> Submit </a>
                 <a className="btn btn-primary btn-sm" type="submit"> Submit </a> */}
 
               </form>
-              <div className="social-login-separator"><span>or</span></div>
-				<div className="social-login-buttons">
-					<button className="facebook-login ripple-effect"> <i className="fas fa-fingerprint"></i> Use BVN Number </button>
-					<button className="google-login ripple-effect"> Use NIN Number </button>
+
+                <div className="social-login-separator"><span>or</span></div>
+                    <div className="social-login-buttons">
+                        <button className="facebook-login ripple-effect"> <i className="fas fa-fingerprint"></i> Use BVN Number </button>
+                        <button className="google-login ripple-effect"> Use NIN Number </button>
 				</div>
                 
             </div>
@@ -256,16 +273,15 @@ export default function IndividualRegistration() {
                             <h4>Confirm your ID by entering the 6 digit code sent to your registered number</h4> <br />
                             <div className="content with-padding padding-bottom-10">
 
-
-                            {isSucess ? (<div> <FlashMessage duration={5000}> <Success>{message}</Success> </FlashMessage><Redirect to="/about_appointment" /> </div>) : ''}
+                            {isSucess ? (<div> <FlashMessage duration={5000}> <Success>{message}</Success> </FlashMessage> <Redirect to={{ pathname : "/about_appointment", state: {property_state: state} }}/> </div>) : ''}
 
                             { isError && (<div>
 												<FlashMessage duration={5000}>
                                                 <Error> {message}</Error>
 												</FlashMessage>
 										</div>)
-
 						    }
+
                             <LoadingOverlay
                                 active={disabled}
                                 spinner={ <BounceLoader color={color} loading={loading}  size={100} /> }

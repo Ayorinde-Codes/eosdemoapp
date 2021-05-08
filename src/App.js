@@ -22,10 +22,10 @@ export default function App(props) {
             <Switch>
               <Route exact path="/" component={Index } /> 
               <Route path="/individual_registration" component={IndividualRegistration} />  
-              <Route path="/about_appointment" component={AboutYourAppointment} />  
-              <Route path="/choose_hospital" component={ChooseHospital} />  
-              <Route path="/choose_time_personnel" component={ChooseTime} />  
-              <Route path="/book_appointment" component={BookAppointment} />  
+              <Route path="/about_appointment" render={(props) => <AboutYourAppointment {...props}/>}  />  
+              <Route path="/choose_hospital" render={(props) => <ChooseHospital {...props}/>} />  
+              <Route path="/choose_time_personnel" render={(props) => <ChooseTime {...props}/>}  />  
+              <Route path="/book_appointment"  render={(props) => <BookAppointment {...props}/>} />  
               <Route path="*" component={Notfound} />
             </Switch>
           </Router>

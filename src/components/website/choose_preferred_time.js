@@ -9,17 +9,20 @@ import { Card, Logo, Form, Success, Input, Button, Error } from "./AuthForms";
 
 import FlashMessage from 'react-flash-message'
 
+import axios from "axios";
+const _ = require('lodash');
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-export default function ChooseTime() {
+
+
+export default function ChooseTime(props) {
     
-    const [fullName, setFullName] = useState("Michael Scofield");
-    const [email, setEmail] = useState("michael@gmail.com");
-	const [address, setAddress] = useState("31,Adekoya close Ikoyi");
-    const [phone, setPhone]= useState("08079552377");
-    const [city, setCity]= useState('Lagos');    
-    const [lga, setLga]= useState('Isale Eko');    
-    const [description, setDescription]= useState('');    
-    const [selectAilment, setSelectAilment]= useState('');    
+
+    const [doctors, setDoctors]= useState([]);
+       
+    const [selectDoctors, setSelectDoctors]= useState('');    
+	const [appointmentDate, setAppointmentDate] = useState(new Date());
 
 
 	const [isError, setIsError] = useState(false);
@@ -33,20 +36,43 @@ export default function ChooseTime() {
     const [message, setMessage] = useState('');
     const [isSucess, setIsSucess] = useState(false);
 
+    const [state, setState] = useState('');
+    const [state2, setState2] = useState('');
+
+
+    useEffect(() => { 
+        getDoctors();
+        setState2(props.location.state.property_state);
+
+
+      }, []);
+
+      const getDoctors = () => {
+        axios.get('https://cors-anywhere.herokuapp.com/http://api.health.staging.ekoopenbuild.com/doctors', {
+            headers: {
+                'Authorisation': ``,
+            }
+          })
+        .then(result => {
+            setDoctors(result.data.OCXPayload.data.data)
+                
+        }).catch(err =>{
+            // setMessage(err.response.data.message)
+            // console.log(err.response.statusText); 
+        })
+  }
 
 
     const postAppointment = (e) => {
 		e.preventDefault();
 
+		let appointment_date = new Date(appointmentDate).toISOString();
+
 		var data = {
-            fullName,
-            email,
-            address,
-            phone,
-            city,
-            lga,
-            description,
-            selectAilment,
+            selectDoctors,
+            appointment_date,
+            AppointmentState: state2,            
+
 		}
 		
         let handleError = validate(data)
@@ -56,6 +82,7 @@ export default function ChooseTime() {
             setErrors(handleError);
         }
         
+        setState(data)
 
         setIsSucess(true)
         setMessage('Submitted Successfully');
@@ -64,8 +91,9 @@ export default function ChooseTime() {
 	
 
 
-     
-    
+      let selectedDoctors = (doctors && doctors.map( (data, index) => { return <option key={index} value={data.firstname}> {data.firstname} {data.lastname} </option> }) )
+
+
     
       const checkboxHandler = () => {
         setConsent(!consent);
@@ -93,7 +121,7 @@ export default function ChooseTime() {
 
             <div className="container mg-top mg-btm">
 
-            {isSucess ? (<div> <FlashMessage duration={5000}> <Success>{message}</Success> </FlashMessage><Redirect to="/book_appointment" /> </div>) : ''}
+            {isSucess ? (<div> <FlashMessage duration={5000}> <Success>{message}</Success> </FlashMessage> <Redirect to={{ pathname : "/book_appointment", state: {property_state: state} }}/> </div>) : ''}
 
 
 
@@ -107,12 +135,7 @@ export default function ChooseTime() {
                                 <div className="submit-field">
                                         <div className="input-with-icon">
                                                 <h6> Available Time </h6>
-                                            <select value={selectAilment} onChange={e => {setSelectAilment(e.target.value);}} placeholder="Select the organization from the drop-down list" >
-                                                    <option value="hospital1"> 2021-05-02 </option> 
-                                                    <option value="hospital2"> 2021-05-02 </option> 
-                                                    <option value="hospital2"> 2021-05-02 </option> 
-                                                    <option value="hospital2"> 2021-05-02 </option> 
-                                            </select>
+												<DatePicker  dateFormat="yyyy-MM-dd" selected={appointmentDate} onChange={date => setAppointmentDate(date)} />
                                         </div>
                                 </div>
                         </div>
@@ -121,12 +144,8 @@ export default function ChooseTime() {
                                 <div className="submit-field">
                                         <div className="input-with-icon">
                                                 <h6> Doctors </h6>
-                                            <select value={selectAilment} onChange={e => {setSelectAilment(e.target.value);}} placeholder="Select the organization from the drop-down list" >
-                                                    <option value="hospital1"> Doctor 1 </option> 
-                                                    <option value="hospital2"> Doctor 2 </option> 
-                                                    <option value="hospital2"> Doctor 3 </option> 
-                                                    <option value="hospital2"> Doctor 4 </option> 
-                                                    <option value="hospital2"> Doctor 5 </option> 
+                                            <select value={selectDoctors} onChange={e => {setSelectDoctors(e.target.value);}} placeholder="Select the organization from the drop-down list" >
+                                                    {selectedDoctors} 
                                             </select>
                                         </div>
                                 </div>
