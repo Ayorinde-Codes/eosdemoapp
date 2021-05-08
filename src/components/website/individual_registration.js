@@ -113,6 +113,7 @@ export default function IndividualRegistration() {
             setMessageLas("invalid Lasgidi Id")
             setLagError(true);
             setDisasbled(false); 
+            return "error";
 
     }
 
