@@ -210,7 +210,7 @@ export default function IndividualRegistration() {
       <div className="row" >
         <div className="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-4 col-lg-4 col-lg-offset-4">
 
-          <h3>Application Name</h3>
+          <h3>Enter Your Resident ID</h3>
           
           <div className="panel panel-default box-shadow">
 
