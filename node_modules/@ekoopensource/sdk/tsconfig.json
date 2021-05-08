@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "watch": false,
+        "lib": ["es2016"],
+        "outDir": "./build",
+        "noEmitOnError": true,
+        "strict": true,
+        "strictPropertyInitialization": false
+    },
+    "exclude": ["tests/**"]
+}
