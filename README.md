@@ -7,8 +7,8 @@
     2. Checkout this repo, install dependencies, then start the gulp process with the following:
 
 ```bash
-    > git clone https://github.com/Ayorinde-Codes/JCyborgTest.git
-    > cd node-express-sequelize-postgres-template
+    > git clone https://github.com/Ayorinde-Codes/eosdemoapp.git
+    > cd eosdemoapp
     > npm install
     > npm start
 ```
