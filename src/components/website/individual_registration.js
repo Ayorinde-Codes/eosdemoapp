@@ -75,8 +75,6 @@ export default function IndividualRegistration() {
     const [isSucess, setIsSucess] = useState(false);
     const [state, setState] = useState('');
 
-
-
     const [open, setOpen] = useState(false);
 
     const onOpenModal = () => setOpen(true);
@@ -99,6 +97,7 @@ export default function IndividualRegistration() {
             return (lasgidi_id)
         })
 
+        console.log(citizen);
         let lasgidi_Id = data.lasgidiId;
 
     let citizen_data = lasgidi_Id
@@ -146,14 +145,9 @@ export default function IndividualRegistration() {
 
         if(pin != data.pinCode)
         {
-
             setMessage(errorMessage)
-
             setIsError(true);
             setDisasbled(false); 
-            
-            
-
         }
         
         else{
@@ -169,21 +163,31 @@ export default function IndividualRegistration() {
         
       }
 
+// for previous implementation
+    // const getCitizens = () => {
+    //     axios.get('https://cors-anywhere.herokuapp.com/https://api.citizens.staging.ekoopenbuild.com/citizens', {
+    //         headers: {
+    //             'Authorisation': ``,
+    //         }
+    //       })
+    //     .then(result => {
+    //         setCitizens(result.data.OCXPayload.data.data)
+                
+    //     }).catch(err =>{
+    //         // setMessage(err.response.data.message)
+    //         // console.log(err.response.statusText); 
+    //     })
+    // }
 
     const getCitizens = () => {
-        axios.get('https://cors-anywhere.herokuapp.com/https://api.citizens.staging.ekoopenbuild.com/citizens', {
-            headers: {
-                'Authorisation': ``,
-            }
+        axios.get('../../../public/json/citizen.json', {
           })
         .then(result => {
-            setCitizens(result.data.OCXPayload.data.data)
+            setCitizens(result.data)
                 
         }).catch(err =>{
-            // setMessage(err.response.data.message)
-            // console.log(err.response.statusText); 
         })
-  }
+    }
 
 
     return (
@@ -235,27 +239,7 @@ export default function IndividualRegistration() {
                   </div>
                 </div>
 
-                {/* <div className="custom-control custom-checkbox mb-3">
-                    <input type="checkbox" className="custom-control-input" id="bvn"  />
-                    <label className="custom-control-label" htmlFor="bvn"> 
-                                Use BVN Number 
-                    </label>
-                </div>
-
-                <div className="custom-control custom-checkbox mb-3">
-                                <input type="checkbox" className="custom-control-input" id="nin"  />
-                                <label className="custom-control-label" htmlFor="nin"> 
-                                            Use NIN Number
-                                </label>
-                            </div> */}
-
-                {/* <a className="btn btn-primary btn-block" type="submit" onClick={onOpenModal}> Submit </a> */}
-                
                 <button className="btn btn-primary btn-block" type="submit"> Submit </button>
-
-                {/* <a className="btn btn-primary btn-sm" type="submit"> Submit </a>
-                <a className="btn btn-primary btn-sm" type="submit"> Submit </a> */}
-
               </form>
 
                 <div className="social-login-separator"><span>or</span></div>
@@ -295,7 +279,6 @@ export default function IndividualRegistration() {
 
                                 <div className="col-xl-6">
                                         <div className="submit-field">
-                                            {/* <h5>Confirm your ID by entering the 6 digit code sent to your registered number</h5> */}
                                             <input type="text" name="name"  value={pinCode} onChange={e => {setPinCode(e.target.value);}} placeholder="Enter Code Here" className="with-border"  />
                                         </div>
                                 </div>

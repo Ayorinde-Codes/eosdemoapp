@@ -1,0 +1,65 @@
+[
+    {
+      "firstname": "Christopher",
+      "lastname": "Trollinger",
+      "specialization": "Cardiology",
+      "phone_numer": "08158089078",
+      "sex": "male"
+    },
+    {
+      "firstname": "Sherry",
+      "lastname": "Key",
+      "specialization": "Dermatology",
+      "phone_numer": "08056468246",
+      "sex": "female"
+    },
+    {
+      "firstname": "Doris",
+      "lastname": "Worden",
+      "specialization": "Anesthesiology",
+      "phone_numer": "08163967433",
+      "sex": "female"
+    },
+    {
+      "firstname": "Michael",
+      "lastname": "Palm",
+      "specialization": "Emergency Medicine",
+      "phone_numer": "08061864329",
+      "sex": "male"
+    },
+    {
+      "firstname": "Stephen",
+      "lastname": "Johnson",
+      "specialization": "Critical Care Medicine",
+      "phone_numer": "08124424096",
+      "sex": "male"
+    },
+    {
+      "firstname": "Carl",
+      "lastname": "Blanco",
+      "specialization": "General Surgery",
+      "phone_numer": "08185790157",
+      "sex": "male"
+    },
+    {
+      "firstname": "David",
+      "lastname": "Jones",
+      "specialization": "Family Medicine",
+      "phone_numer": "08144951528",
+      "sex": "male"
+    },
+    {
+      "firstname": "Charles",
+      "lastname": "Williams",
+      "specialization": "Neurosurgery",
+      "phone_numer": "08125645965",
+      "sex": "male"
+    },
+    {
+      "firstname": "Corey",
+      "lastname": "Mickens",
+      "specialization": "Neurology",
+      "phone_numer": "08178402427",
+      "sex": "male"
+    }
+]

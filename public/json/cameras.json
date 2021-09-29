@@ -1,0 +1,44 @@
+{
+    "cameras": [
+      {
+        "location": "2090 Settlers Lane",
+        "camera_type": "Thermal (FLIR) Camera"
+      },
+      {
+        "location": "2632 Skips Lane",
+        "camera_type": "Day/Night Camera"
+      },
+      {
+        "location": "4499 Pringle Drive",
+        "camera_type": "Bullet Camera"
+      },
+      {
+        "location": "3494 Charles Street",
+        "camera_type": "Dome Camera"
+      },
+      {
+        "location": "4605 Kembery Drive",
+        "camera_type": "PTZ Camera"
+      },
+      {
+        "location": "2622 Circle Drive",
+        "camera_type": "Dome Camera"
+      },
+      {
+        "location": "4498 Pineview Drive",
+        "camera_type": "Thermal (FLIR) Camera"
+      },
+      {
+        "location": "2131 Gnatty Creek Road",
+        "camera_type": "Wide Dynamic Security Camera"
+      },
+      {
+        "location": "2703 James Avenue",
+        "camera_type": "Day/Night Camera"
+      },
+      {
+        "location": "4396 Fort Street",
+        "camera_type": "Box Camera"
+      }
+    ]
+  }
