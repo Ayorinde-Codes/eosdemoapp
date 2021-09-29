@@ -42,21 +42,38 @@ export default function ChooseHospital(props) {
 
       }, []);
 
-      const getHospitals = () => {
-        axios.get('https://cors-anywhere.herokuapp.com/https://api.health.staging.ekoopenbuild.com/hospitals', {
-            headers: {
-                'Authorisation': ``,
-            }
-          })
-        .then(result => {
-            console.log(result.data.OCXPayload.data.data)
-            setHospitals(result.data.OCXPayload.data.data)
+//       const getHospitals = () => {
+//         axios.get('https://cors-anywhere.herokuapp.com/https://api.health.staging.ekoopenbuild.com/hospitals', {
+//             headers: {
+//                 'Authorisation': ``,
+//             }
+//           })
+//         .then(result => {
+//             console.log(result.data.OCXPayload.data.data)
+//             setHospitals(result.data.OCXPayload.data.data)
                 
-        }).catch(err =>{
-            // setMessage(err.response.data.message)
-            // console.log(err.response.statusText); 
-        })
-  }
+//         }).catch(err =>{
+//             // setMessage(err.response.data.message)
+//             // console.log(err.response.statusText); 
+//         })
+//   }
+
+
+  const getHospitals = () => {
+    axios.get('../../../public/json/hospitals.json', {
+        headers: {
+            'Authorisation': ``,
+        }
+      })
+    .then(result => {
+        console.log(result.data)
+        setHospitals(result.data)
+            
+    }).catch(err =>{
+        // setMessage(err.response.data.message)
+        // console.log(err.response.statusText); 
+    })
+}
 
   const findValue = (arr, value) => {
     return _.find(arr, (elem) => {

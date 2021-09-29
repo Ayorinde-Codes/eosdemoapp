@@ -1,0 +1,49 @@
+{
+    "road": [
+      {
+        "name": "Badagry Express Way",
+        "number_of_lanes": "4",
+        "distance": "400km",
+        "condition": "open",
+        "lga": "badagry",
+        "last_maintained_at": "24th June, 2018",
+        "created_at": "20th June 1994"
+      },
+      {
+        "name": "Lekki Epe Express Way",
+        "number_of_lanes": "4",
+        "distance": "600km",
+        "condition": "open",
+        "lga": "eti-osa",
+        "last_maintained_at": "24th feb, 2020",
+        "created_at": "10th april 2006"
+      },
+      {
+        "name": "Lagos-Shagamu Express Way",
+        "number_of_lanes": "2",
+        "distance": "200km",
+        "condition": "closed",
+        "lga": "shagamu",
+        "last_maintained_at": "4th oct, 2020",
+        "created_at": "7th sept 2002"
+      },
+      {
+        "name": "Lagos-Ibadan Express Way",
+        "number_of_lanes": "6",
+        "distance": "1200km",
+        "condition": "open",
+        "lga": "ebute",
+        "last_maintained_at": "1st may, 2019",
+        "created_at": "5th march 1950"
+      },
+      {
+        "name": "Lagos-abeokuta Express Way",
+        "number_of_lanes": "4",
+        "distance": "1200km",
+        "condition": "open",
+        "lga": "ebute",
+        "last_maintained_at": "2nd jan, 2020",
+        "created_at": "7th sept 2010"
+      }
+    ]
+  }

@@ -1,0 +1,64 @@
+{
+    "residents": [
+      {
+        "firstname": "Oscar",
+        "lastname": "Seay",
+        "house_number": "1528",
+        "street": "Highland View Drive"
+      },
+      {
+        "firstname": "James",
+        "lastname": "Jablonski",
+        "house_number": "3305",
+        "street": "Gladwell Street"
+      },
+      {
+        "firstname": "Aaron",
+        "lastname": "Harper",
+        "house_number": "3824",
+        "street": "Richland Avenue"
+      },
+      {
+        "firstname": "Neil",
+        "lastname": "Burkey",
+        "house_number": "4315",
+        "street": "Palmer Road"
+      },
+      {
+        "firstname": "Brandon",
+        "lastname": "Noel",
+        "house_number": "3944",
+        "street": "Alpha Avenue"
+      },
+      {
+        "firstname": "Maricela",
+        "lastname": "Kendrick",
+        "house_number": "1540",
+        "street": "Rollins Road"
+      },
+      {
+        "firstname": "Samantha",
+        "lastname": "Mathis",
+        "house_number": "1611",
+        "street": "Eagles Nest Drive"
+      },
+      {
+        "firstname": "Patrick",
+        "lastname": "McCarthy",
+        "house_number": "3598",
+        "street": "Washington Street"
+      },
+      {
+        "firstname": "Irma",
+        "lastname": "Galloway",
+        "house_number": "1684",
+        "street": "Turkey Pen Road"
+      },
+      {
+        "firstname": "Kelley",
+        "lastname": "Hassan",
+        "house_number": "3000",
+        "street": "Spring Street"
+      }
+    ]
+  }

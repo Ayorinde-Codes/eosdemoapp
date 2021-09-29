@@ -1,0 +1,26 @@
+
+    [
+        {
+            "firstname": "Demilade",
+            "lastname": "Abraham",
+            "lasgidi_id": "LA0783",
+            "gender": "Male",
+            "address": "21, address"
+        },
+        {
+            "firstname": "Mary",
+            "lastname": "Shafiya",
+            "lasgidi_id": "LA3433",
+            "gender": "Female",
+            "address": "21, address"
+
+        },
+        {
+            "firstname": "Ikechukwu",
+            "lastname": "Davis",
+            "lasgidi_id": "LA2743",
+            "gender": "Male",
+            "address": "21, address"
+
+        }
+    ]

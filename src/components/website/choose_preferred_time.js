@@ -47,18 +47,28 @@ export default function ChooseTime(props) {
 
       }, []);
 
-      const getDoctors = () => {
-        axios.get('https://cors-anywhere.herokuapp.com/http://api.health.staging.ekoopenbuild.com/doctors', {
-            headers: {
-                'Authorisation': ``,
-            }
+    //   const getDoctors = () => {
+    //     axios.get('https://cors-anywhere.herokuapp.com/http://api.health.staging.ekoopenbuild.com/doctors', {
+    //         headers: {
+    //             'Authorisation': ``,
+    //         }
+    //       })
+    //     .then(result => {
+    //         setDoctors(result.data.OCXPayload.data.data)
+                
+    //     }).catch(err =>{
+    //         // setMessage(err.response.data.message)
+    //         // console.log(err.response.statusText); 
+    //     })
+
+    const getDoctors = () => {
+        axios.get('../../../public/json/doctors.json', {
           })
         .then(result => {
-            setDoctors(result.data.OCXPayload.data.data)
+            console.log(result.data)
+            setDoctors(result.data)
                 
         }).catch(err =>{
-            // setMessage(err.response.data.message)
-            // console.log(err.response.statusText); 
         })
   }
 
@@ -96,8 +106,7 @@ export default function ChooseTime(props) {
 
     
       const checkboxHandler = () => {
-        setConsent(!consent);
-        
+        setConsent(!consent); 
       }
 
 

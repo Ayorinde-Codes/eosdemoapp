@@ -1,0 +1,82 @@
+[
+      {
+        "uuid" : "esd23ds-sdfs",
+        "name": "Pine Valley Medical Center",
+        "address": "4511 Linden Avenue",
+        "lga": "eti osa",
+        "type": "private",
+        "speciality": "dentist"
+      },
+      {
+        "uuid" : "esd13ds-sd4fs",
+        "name": "Honor Medical Center",
+        "address": "1668  Winding Way",
+        "lga": "ikeja",
+        "type": "state",
+        "speciality": "dentist"
+      },
+      {
+        "uuid" : "esd1ds-sd4fs",
+        "name": "Fairmont Community Hospital",
+        "address": "4511 Linden Avenue",
+        "lga": "epe",
+        "type": "federal",
+        "speciality": "dentist"
+      },
+      {
+        "uuid" : "e2341ds-sd4fs",
+        "name": "Northshore Clinic",
+        "address": "457  Geraldine Lane",
+        "lga": "ojo",
+        "type": "private",
+        "speciality": "dentist"
+      },
+      {
+        "uuid" : "es413ds-s9fs",
+        "name": "Ruby Valley Hospital",
+        "address": "1052  Parrill Court",
+        "lga": "badagry",
+        "type": "private",
+        "speciality": "dentist"
+      },
+      {
+        "uuid" : "e21113ds-sd4fs",
+        "name": "Oakdale Community Hospital",
+        "address": "1007  Holden Street",
+        "lga": "epe",
+        "type": "state",
+        "speciality": "dentist"
+      },
+      {
+        "uuid" : "esdww3ds-sd4fs",
+        "name": "Tulip Medical Center",
+        "address": "1033  Holden Street",
+        "lga": "epe",
+        "type": "federal",
+        "speciality": "dentist"
+      },
+      {
+        "uuid" : "esd13ds-sd111",
+        "name": "Hope Garden Clinic",
+        "address": "565  Dog Hill Lane",
+        "lga": "agege",
+        "type": "private",
+        "speciality": "dentist"
+      },
+      {
+        "uuid" : "esaads-sd4fs",
+        "name": "Horizon Medical Center",
+        "address": "854  Spring Street",
+        "lga": "eti-osa",
+        "type": "federal",
+        "speciality": "dentist"
+      },
+      {
+        "uuid" : "e2113ds-sd4fs",
+        "name": "Fountain Valley Hospital",
+        "address": "3419  Shingleton Road",
+        "lga": "ojo",
+        "type": "private",
+        "speciality": "dentist"
+      }
+    ]
